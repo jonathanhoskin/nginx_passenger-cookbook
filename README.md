@@ -75,22 +75,22 @@ There are several other attributes that can be set on the resource:
 * __rails_env:__ Set the Passenger `rails_env` setting
 * __cert:__ Key that specifies an SSL certificate that should be downloaded
     and installed for the app.  Uses a databag specified in
-    `node.nginx_passenger.cert_databag`.
-* __generate_cert:__ If you do not have a certificate but want your site to be served over https, setting this to true will cause the a key and cert to be automatically generated for you. Note that this certificate will be self signed and should probably not be used in production environments! You can set `node.nginx_passenger.cert_authority` if you wish to change the certificate authority shown on the certificate, which ships as 'Self Signed'.
+    `node['nginx_passenger']['cert_databag']`.
+* __generate_cert:__ If you do not have a certificate but want your site to be served over https, setting this to true will cause the a key and cert to be automatically generated for you. Note that this certificate will be self signed and should probably not be used in production environments! You can set `node['nginx_passenger']['cert_authority']` if you wish to change the certificate authority shown on the certificate, which ships as 'Self Signed'.
 * __http:__ Should HTTP be supported?  If no cert is provided, the answer
     will be yes, regardless of the value of this flag.  If a cert is provided
     (and HTTPS is therefore enabled), this setting determines whether the
     app should also be served up over HTTP.  If not, you can optionally have
     HTTP access redirect to HTTPS based on the value of
-    `node.nginx_passenger.redirect_to_https`.
+    `node['nginx_passenger']['redirect_to_https']`.
 * __template:__ If you would like to specify custom nginx / Passenger
     configuration, you can specify its name here.  By default, the resource
     will use a stock config that is included.
 * __min_instances:__ Passenger's `passenger_min_instances` setting.  By default,
-    set to the value of `node.nginx_passenger.site_min_instances`, which ships as
+    set to the value of `node['nginx_passenger']['site_min_instances']`, which ships as
     to 2.
 * __max\_body\_size:__ Nginx `client_max_body_size` setting.  Defaults to
-    `node.nginx_passenger.site_max_body_size`, which ships as '8M' (8 megabytes).
+    `node['nginx_passenger']['site_max_body_size']`, which ships as '8M' (8 megabytes).
 
 If `site` resource specifies a `maintenance_page`, traffic will be redirected
 there if a given maintenance check file is present.  By default, we look for

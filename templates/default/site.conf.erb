@@ -5,11 +5,11 @@ server {
     ssl on;
     server_name <%= @resource.server %>;
 
-    ssl_certificate <%= node.nginx_passenger.certs_dir %>/<%= @resource.name %>.cert;
-    ssl_certificate_key <%= node.nginx_passenger.certs_dir %>/<%= @resource.name %>.key;
+    ssl_certificate <%= node['nginx_passenger']['certs_dir'] %>/<%= @resource.name %>.cert;
+    ssl_certificate_key <%= node['nginx_passenger']['certs_dir'] %>/<%= @resource.name %>.key;
 
-    access_log <%= node.nginx_passenger.log_dir %>/<%= @resource.name %>.ssl.access.log <%= @log_format %>;
-    error_log <%= node.nginx_passenger.log_dir %>/<%= @resource.name %>.ssl.error.log;
+    access_log <%= node['nginx_passenger']['log_dir'] %>/<%= @resource.name %>.ssl.access.log <%= @log_format %>;
+    error_log <%= node['nginx_passenger']['log_dir'] %>/<%= @resource.name %>.ssl.error.log;
 
     location / {
         <% if @resource.static %>
@@ -33,9 +33,9 @@ server {
         passenger_user "<%= @resource.user %>";
         <% end %>
 
-        passenger_min_instances <%= @resource.min_instances || node.nginx_passenger.site_min_instances %>;
+        passenger_min_instances <%= @resource.min_instances || node['nginx_passenger']['site_min_instances'] %>;
 
-        client_max_body_size <%= @resource.max_body_size || node.nginx_passenger.site_max_body_size %>;
+        client_max_body_size <%= @resource.max_body_size || node['nginx_passenger']['site_max_body_size'] %>;
         <% end %>
     }
 
@@ -56,7 +56,7 @@ server {
     <% end %>
 }
 
-    <% if !@resource.http && node.nginx_passenger.redirect_to_https %>
+    <% if !@resource.http && node['nginx_passenger']['redirect_to_https'] %>
 
     server {
         listen 80;
@@ -74,8 +74,8 @@ server {
     listen 80;
     server_name <%= @resource.server %>;
 
-    access_log <%= node.nginx_passenger.log_dir %>/<%= @resource.name %>.access.log <%= @log_format %>;
-    error_log <%= node.nginx_passenger.log_dir %>/<%= @resource.name %>.error.log;
+    access_log <%= node['nginx_passenger']['log_dir'] %>/<%= @resource.name %>.access.log <%= @log_format %>;
+    error_log <%= node['nginx_passenger']['log_dir'] %>/<%= @resource.name %>.error.log;
 
     location / {
         <% if @resource.static %>
@@ -99,9 +99,9 @@ server {
         passenger_user "<%= @resource.user %>";
         <% end %>
 
-        passenger_min_instances <%= @resource.min_instances || node.nginx_passenger.site_min_instances %>;
+        passenger_min_instances <%= @resource.min_instances || node['nginx_passenger']['site_min_instances'] %>;
 
-        client_max_body_size <%= @resource.max_body_size || node.nginx_passenger.site_max_body_size %>;
+        client_max_body_size <%= @resource.max_body_size || node['nginx_passenger']['site_max_body_size'] %>;
         <% end %>
     }
 
