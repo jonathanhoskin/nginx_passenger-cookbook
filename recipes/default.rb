@@ -14,7 +14,7 @@ package "apt-transport-https"
 apt_uri = node['nginx_passenger']['use_passenger_4'] ? "https://oss-binaries.phusionpassenger.com/apt/passenger/4" : "https://oss-binaries.phusionpassenger.com/apt/passenger"
 
 apt_repository "phusion" do
-  action        :add
+  action        :nothing
   uri           apt_uri
   distribution  node['lsb']['codename']
   components    ['main']
