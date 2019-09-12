@@ -20,7 +20,7 @@ apt_repository "phusion" do
   components    ['main']
   keyserver     "hkp://keyserver.ubuntu.com:80"
   key           "561F9B9CAC40B2F7"
-end
+end.run_action(:add)
 
 # -- Install packages -- #
 
