@@ -2,6 +2,9 @@
 
 user www-data;
 worker_processes <%= node['nginx_passenger']['nginx_workers'] %>;
+<% if node['platform_version'].split('.').first.to_i > 16 %>
+include /etc/nginx/modules-enabled/*.conf;
+<% end %>
 pid /var/run/nginx.pid;
 
 <% if node['nginx_passenger']['keep_env_path'] %>
